@@ -17,38 +17,47 @@ pipeline {
 
         stage('Prepare .env') {
             steps {
-                sh '''
-                cat > .env <<EOF
-                    STRIPE_SECRET=${STRIPE_SECRET}
-                    SECRET=${STRIPE_SECRET}
-                    MONGODB_URL=${MONGODB_URL}
-                    EOF
-                '''
+                dir('Deploy') {   
+                    sh '''
+                    cat > .env <<EOF
+                        STRIPE_SECRET=${STRIPE_SECRET}
+                        SECRET=${SECRET}
+                        MONGODB_URL=${MONGODB_URL}
+                        EOF
+                    '''
+                }
             }
         }
 
         stage('Build Images') {
             steps {
-                sh 'docker compose -f Deploy/docker-compose.yml build --no-cache'
+                dir('Deploy') {
+                    sh 'docker compose build --no-cache'
+                }
             }
         }
 
         stage('Start Services') {
             steps {
-                sh 'docker compose -f Deploy/docker-compose.yml up -d --force-recreate'
+                dir('Deploy') {
+                    sh 'docker compose up -d --force-recreate'
+                }
             }
         }
 
-
         stage('Verify') {
             steps {
-                sh 'docker compose ps'
+                dir('Deploy') {
+                    sh 'docker compose ps'
+                }
             }
         }
 
         stage('Cleanup .env') {
             steps {
-                sh 'rm -f .env'
+                dir('Deploy') {
+                    sh 'rm -f .env'
+                }
             }
         }
     }

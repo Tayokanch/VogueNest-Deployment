@@ -1,6 +1,6 @@
 services:
   voguenest-frontend:
-    build: ../Voguenest-Frontend
+    build: ../../Voguenest-Frontend
     container_name: voguenest-frontend
     image: voguenest-frontend:latest
     volumes:
@@ -10,7 +10,7 @@ services:
     restart: always
 
   voguenestapi_v1:
-    build: ../Voguenest-Server
+    build: ../../Voguenest-Server
     container_name: voguenestapi_v1
     image: voguenestapi:latest
     environment:
@@ -28,7 +28,7 @@ services:
       start_period: 20s
 
   voguenestapi_v2:
-    build: ../Voguenest-Server
+    build: ../../Voguenest-Server
     container_name: voguenestapi_v2
     image: voguenestapi:latest
     environment:
@@ -46,7 +46,7 @@ services:
       start_period: 20s
 
   voguenestapi_v3:
-    build: ../Voguenest-Server
+    build: ../../Voguenest-Server
     container_name: voguenestapi_v3
     image: voguenestapi:latest
     environment:
