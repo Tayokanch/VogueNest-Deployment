@@ -1,0 +1,69 @@
+services:
+  voguenest-frontend:
+    build: ../Voguenest-Frontend
+    container_name: voguenest-frontend
+    image: voguenest-frontend:latest
+    volumes:
+      - ./nginx/vogueshopping.conf:/etc/nginx/conf.d/vogueshopping.conf
+    networks:
+      - vogueshopping_network
+    restart: always
+
+  voguenestapi_v1:
+    build: ../Voguenest-Server
+    container_name: voguenestapi_v1
+    image: voguenestapi:latest
+    environment:
+      SECRET: ${SECRET}
+      PORT: 3100
+      MONGODB_URL: ${MONGODB_URL}
+      STRIPE_SECRET: ${STRIPE_SECRET}
+    networks:
+      - vogueshopping_network
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3100/api/health || exit 1"]
+      interval: 5s
+      retries: 5
+      start_period: 20s
+
+  voguenestapi_v2:
+    build: ../Voguenest-Server
+    container_name: voguenestapi_v2
+    image: voguenestapi:latest
+    environment:
+      SECRET: ${SECRET}
+      PORT: 3200
+      MONGODB_URL: ${MONGODB_URL}
+      STRIPE_SECRET: ${STRIPE_SECRET}
+    networks:
+      - vogueshopping_network
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3200/api/health || exit 1"]
+      interval: 5s
+      retries: 5
+      start_period: 20s
+
+  voguenestapi_v3:
+    build: ../Voguenest-Server
+    container_name: voguenestapi_v3
+    image: voguenestapi:latest
+    environment:
+      SECRET: ${SECRET}
+      PORT: 3300
+      MONGODB_URL: ${MONGODB_URL}
+      STRIPE_SECRET: ${STRIPE_SECRET}
+    networks:
+      - vogueshopping_network
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3300/api/health || exit 1"]
+      interval: 5s
+      retries: 5
+      start_period: 20s
+
+networks:
+  vogueshopping_network:
+    external: true
+

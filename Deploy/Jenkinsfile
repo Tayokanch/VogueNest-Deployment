@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+
+    environment {
+        STRIPE_SECRET   = credentials('STRIPE_SECRET')
+        SECRET          = credentials('SECRET')
+        MONGODB_URL     = credentials('MONGODB_URL')
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Prepare .env') {
+            steps {
+                sh '''
+                cat > .env <<EOF
+                    STRIPE_SECRET=${STRIPE_SECRET}
+                    SECRET=${STRIPE_SECRET}
+                    MONGODB_URL=${MONGODB_URL}
+                    EOF
+                '''
+            }
+        }
+
+        stage('Build Images') {
+            steps {
+                sh 'docker compose build --no-cache'
+            }
+        }
+
+        stage('Start Services') {
+            steps {
+                sh 'docker compose up -d --force-recreate'
+            }
+        }
+
+
+        stage('Verify') {
+            steps {
+                sh 'docker compose ps'
+            }
+        }
+
+        stage('Cleanup .env') {
+            steps {
+                sh 'rm -f .env'
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+# Logs
+logs
+*.log
+package-lock.json
+/node_modules
+/dist
+dist-ssr
+*.local
+dist
+
+
+# Ignore node_modules directory
+node_modules/
+/dist
+.env
+# Ignore environment files
