@@ -1,0 +1,57 @@
+import express from 'express';
+import http from 'http';
+import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import cors from 'cors';
+import morgan from 'morgan';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
+import userRouter from './routers/userRouter';
+import refreshTokenRouter from './routers/refreshTokenRouter';
+import orderRouter from './routers/orderRouter';
+import stripeRouter from './routers/stripe';
+import { refreshTokenLimiter } from './controllers/refreshTokenLimiter';
+import healthCheckRouter from './routers/healthRouter'
+dotenv.config();
+
+const app = express();
+
+
+app.use(cors({
+  origin: ['https://voguenest.tayolabs.dev', 'http://localhost:5173'],
+  credentials: true,
+}));
+
+app.use(compression());
+app.use(cookieParser());
+app.use(express.json());  
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+
+app.use('/api', userRouter);
+app.use('/api', orderRouter);
+app.use('/api/payment', stripeRouter);
+app.use('/api', refreshTokenLimiter, refreshTokenRouter);
+app.use('/api', healthCheckRouter);
+
+const PORT = process.env.PORT || 3100;  
+app.listen(PORT, () => {
+  console.log(`Server running on http://127.0.0.1:${PORT}/`);
+});
+
+const MONGODB_URL = process.env.MONGODB_URL;
+if (!MONGODB_URL) {
+  throw new Error('MONGODB_URL is not defined');
+}
+
+
+mongoose.connect(MONGODB_URL)
+  .then(() => {
+    console.log('Successfully connected to MongoDB');
+  })
+  .catch((error: Error) => {
+    console.error('Error connecting to MongoDB:', error.message);
+    console.error(error.stack);
+    process.exit(1);  
+  });
