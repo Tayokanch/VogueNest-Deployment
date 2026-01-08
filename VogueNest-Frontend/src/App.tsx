@@ -17,13 +17,12 @@ import Signup from './pages/Signup';
 import Cancel from './components/payment/Cancel';
 import Success from './components/payment/Success';
 
-
 const App = () => {
   return (
     <div className="px-4 sm:px[5vw] md:px-[7vw] lg:px- [9vw] bg-AliceBlue min-h-screen	">
       <ToastContainer />
       <NavBar />
-      <SearchBar />
+     <SearchBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useForm } from "../../node_modules/react-hook-form/dist";
 import { FormData } from "../services/interface";
 import { useContext, useState } from "react";
 import LoadingBar from "../components/LoadingBar";
 import { ProductContext } from "../contexts/ProductContext";
 import { userAuth } from "../contexts/AuthContext";
+import { useForm } from "react-hook-form";
 const Signup = () => {
   const {
     register,
