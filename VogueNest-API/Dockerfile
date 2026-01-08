@@ -1,20 +1,27 @@
+# Stage 1: Build
+FROM node:lts-alpine AS build
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npx tsc
+
+# Stage 2: Production image
 FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY package*.json .
-
+COPY package*.json ./
 RUN npm install --omit=dev
 
-COPY . .
+COPY --from=build /app/dist ./dist
 
-# Compile TypeScript
-RUN npx tsc
-
-ENV PORT=3100
-
+ENV PORT=3000
 EXPOSE ${PORT}
 
-# Run compiled JS
 CMD ["node", "dist/server.js"]
-
