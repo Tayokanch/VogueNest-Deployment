@@ -1,40 +1,23 @@
-# -------- Stage 1: Build --------
-FROM node:lts-alpine AS build
+# -------- Stage 1: Build React --------
+FROM node:20-alpine AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files and install all dependencies
 COPY package*.json ./
 RUN npm install
 
-# Install TypeScript globally for this build stage
-RUN npm install -g typescript
-
-# Copy the rest of your source code
 COPY . .
+RUN npm run build   
 
-# Compile TypeScript into JavaScript
-RUN npx tsc
+# -------- Stage 2: Nginx --------
+FROM nginx:alpine
 
-# -------- Stage 2: Production --------
-FROM node:lts-alpine
+# Copy React build
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Set working directory
-WORKDIR /app
+# Copy site config (used by CENTRAL nginx routing)
+COPY ./nginx/vogueshopping.conf /etc/nginx/conf.d/default.conf
 
-# Copy only production dependencies
-COPY package*.json ./
-RUN npm install --omit=dev
-
-# Copy compiled JavaScript from build stage
-COPY --from=build /app/dist ./dist
-
-# Optional: custom Nginx config
-COPY ./nginx/vogueshopping.conf /etc/nginx/conf.d/vogueshopping.conf
-
-# Expose port
 EXPOSE 80
 
-# Start the server
 CMD ["nginx", "-g", "daemon off;"]
