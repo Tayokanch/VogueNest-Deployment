@@ -12,6 +12,8 @@ RUN npm install -g typescript
 
 COPY . .
 
+RUN npm run build
+
 RUN npx tsc
 
 # Stage 2: Production image
