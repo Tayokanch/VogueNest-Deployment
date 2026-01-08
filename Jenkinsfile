@@ -28,10 +28,11 @@ pipeline {
         }
 
         stage('Build Images') {
-          steps {
-            dir("${env.WORKSPACE}/voguenest-fullstack") { 
-            sh 'docker compose build --no-cache'
-        }
+            steps {
+                dir("${env.WORKSPACE}/voguenest-fullstack") { 
+                    sh 'docker compose build --no-cache'
+                }
+            }
         }
 
         stage('Deploy Services') {
