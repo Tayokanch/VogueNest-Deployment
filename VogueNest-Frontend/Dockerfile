@@ -16,7 +16,6 @@ FROM nginx:alpine
 # Copy built React app into Nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Optional: copy custom Nginx config if needed
-COPY /nginx/vogueshopping.conf /etc/nginx/conf.d/vogueshopping.conf
+COPY ./nginx/vogueshopping.conf /etc/nginx/conf.d/vogueshopping.conf
 
 CMD ["nginx", "-g", "daemon off;"]
