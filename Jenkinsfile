@@ -33,9 +33,13 @@ pipeline {
             }
         }
 
-        stage('Start Services') {
+        stage('Deploy Services') {
             steps {
-                sh 'docker compose up -d --force-recreate'
+            sh '''
+                docker compose down
+                docker compose build --no-cache
+                docker compose up -d --scale voguenest-api=3
+            '''
             }
         }
 
