@@ -15,7 +15,7 @@ RUN npm install -g typescript
 COPY . .
 
 # Compile TypeScript into JavaScript
-RUN tsc
+RUN npx tsc
 
 # -------- Stage 2: Production --------
 FROM node:lts-alpine
