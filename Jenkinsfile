@@ -26,6 +26,12 @@ pipeline {
                 '''
             }
         }
+        stage('Debug Workspace') {
+            steps {
+                sh 'pwd'
+                sh 'ls -la'
+            }
+        }
 
         stage('Build Images') {
             steps {
