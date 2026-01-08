@@ -26,22 +26,17 @@ pipeline {
                 '''
             }
         }
-        stage('Debug Workspace') {
-            steps {
-                sh 'pwd'
-                sh 'ls -la'
-            }
-        }
-        
-        stage('Clean Workspace') {
-            steps {
-                deleteDir()  
-            }
-        }
 
         stage('Build Images') {
             steps {
                 sh 'docker compose build --no-cache'
+            }
+        }
+
+        stage('Debug Workspace') {
+            steps {
+                sh 'pwd'
+                sh 'ls -la'
             }
         }
 
