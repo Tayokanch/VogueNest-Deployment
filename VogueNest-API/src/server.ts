@@ -35,6 +35,7 @@ app.use('/api/payment', stripeRouter);
 app.use('/api', refreshTokenLimiter, refreshTokenRouter);
 app.use('/api', healthCheckRouter);
 
+app.set('trust proxy', 3);
 const PORT = process.env.PORT || 3100;  
 app.listen(PORT, () => {
   console.log(`Server running on http://127.0.0.1:${PORT}/`);
