@@ -7,6 +7,9 @@ COPY package*.json ./
 
 RUN npm install
 
+# Install TypeScript globally for this build stage
+RUN npm install -g typescript
+
 COPY . .
 
 RUN npx tsc
