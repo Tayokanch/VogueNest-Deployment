@@ -1,25 +1,32 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { LoginData } from '../services/interface';
-import LoadingBar from '../components/LoadingBar';
-import { userAuth } from '../contexts/AuthContext';
-import { useEffect } from 'react';
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useForm } from "../../node_modules/react-hook-form/dist";
+import { LoginData } from "../services/interface";
+import LoadingBar from "../components/LoadingBar";
+import { userAuth } from "../contexts/AuthContext";
+import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const redirectPath = searchParams.get('redirect') || '/';
-  
+  const redirectPath = searchParams.get("redirect") || "/";
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginData>({
-    mode: 'onChange',
+    mode: "onChange",
   });
 
-  const { login, loading, errorMessage, successMessage, setErrorMessage, setSuccessMessage } = userAuth();
+  const {
+    login,
+    loading,
+    errorMessage,
+    successMessage,
+    setErrorMessage,
+    setSuccessMessage,
+  } = userAuth();
 
   // Clear messages when component unmounts
   useEffect(() => {
@@ -31,7 +38,7 @@ const Login = () => {
 
   // Redirect after successful login
   useEffect(() => {
-    if (successMessage && successMessage.includes('successful')) {
+    if (successMessage && successMessage.includes("successful")) {
       navigate(redirectPath);
     }
   }, [successMessage, navigate, redirectPath]);
@@ -47,12 +54,12 @@ const Login = () => {
       className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-black"
     >
       <div className="inline-flex items-center gap-2 mt-10">
-        <p className="prata-regular text-3xl">{'Login'}</p>
+        <p className="prata-regular text-3xl">{"Login"}</p>
         <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
       </div>
 
       <input
-        {...register('email', { required: 'The email field is required' })}
+        {...register("email", { required: "The email field is required" })}
         type="email"
         className="w-full px-3 py-2 border border-gray-800"
         placeholder="Email"
@@ -60,12 +67,12 @@ const Login = () => {
       {errors.email && <p className="text-red-600">{errors.email.message}</p>}
 
       <input
-        {...register('password', {
-          required: 'The password field is required',
+        {...register("password", {
+          required: "The password field is required",
           pattern: {
             value: passwordPattern,
             message:
-              'Password must contain at least 8 characters, including uppercase, lowercase, number, and special character',
+              "Password must contain at least 8 characters, including uppercase, lowercase, number, and special character",
           },
         })}
         type="password"
@@ -80,19 +87,23 @@ const Login = () => {
         <p className="cursor-pointer">Forgot your password?</p>
         <Link to="/sign-up">Create account</Link>
       </div>
-      
+
       {/* Display error messages */}
-      {errorMessage && <p className="text-red-600 mt-2 text-center">{errorMessage}</p>}
-      
+      {errorMessage && (
+        <p className="text-red-600 mt-2 text-center">{errorMessage}</p>
+      )}
+
       {/* Display success messages */}
-      {successMessage && <p className="text-green-600 mt-2 text-center">{successMessage}</p>}
-      
+      {successMessage && (
+        <p className="text-green-600 mt-2 text-center">{successMessage}</p>
+      )}
+
       <button
         type="submit"
         className="bg-black text-white font-light px-8 py-2 mt-4"
         disabled={isSubmitting || loading}
       >
-        {loading ? <LoadingBar /> : 'Login'}
+        {loading ? <LoadingBar /> : "Login"}
       </button>
     </form>
   );

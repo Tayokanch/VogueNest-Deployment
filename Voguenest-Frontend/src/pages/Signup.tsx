@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { FormData } from '../services/interface';
-import { useContext, useState } from 'react';
-import LoadingBar from '../components/LoadingBar';
-import { ProductContext } from '../contexts/ProductContext';
-import { userAuth } from '../contexts/AuthContext';
+import { Link } from "react-router-dom";
+import { useForm } from "../../node_modules/react-hook-form/dist";
+import { FormData } from "../services/interface";
+import { useContext, useState } from "react";
+import LoadingBar from "../components/LoadingBar";
+import { ProductContext } from "../contexts/ProductContext";
+import { userAuth } from "../contexts/AuthContext";
 const Signup = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
-    mode: 'onChange',
+    mode: "onChange",
   });
   const [serverError, setServerError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -29,12 +29,12 @@ const Signup = () => {
       className="flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-black"
     >
       <div className="inline-flex items-center gap-2 mt-10">
-        <p className="prata-regular text-3xl">{'Sign Up'}</p>
+        <p className="prata-regular text-3xl">{"Sign Up"}</p>
         <hr className="border-none h-[1.5px] w-8 bg-gray-800" />
       </div>
 
       <input
-        {...register('name', { required: 'The name field is required' })}
+        {...register("name", { required: "The name field is required" })}
         type="text"
         className="w-full px-3 py-2 border border-gray-800"
         placeholder="Name"
@@ -42,7 +42,7 @@ const Signup = () => {
       {errors.name && <p className="text-red-600">{errors.name.message}</p>}
 
       <input
-        {...register('email', { required: 'The email field is required' })}
+        {...register("email", { required: "The email field is required" })}
         type="email"
         className="w-full px-3 py-2 border border-gray-800"
         placeholder="Email"
@@ -50,12 +50,12 @@ const Signup = () => {
       {errors.email && <p className="text-red-600">{errors.email.message}</p>}
 
       <input
-        {...register('password', {
-          required: 'The password field is required',
+        {...register("password", {
+          required: "The password field is required",
           pattern: {
             value: passwordPattern,
             message:
-              'Password must contain at least 8 characters, including uppercase, lowercase, number, and special character',
+              "Password must contain at least 8 characters, including uppercase, lowercase, number, and special character",
           },
         })}
         type="password"
@@ -81,7 +81,7 @@ const Signup = () => {
         className="bg-black text-white font-light px-8 py-2 mt-4"
         disabled={isSubmitting}
       >
-        {loading ? <LoadingBar /> : 'Sign up'}
+        {loading ? <LoadingBar /> : "Sign up"}
       </button>
     </form>
   );
