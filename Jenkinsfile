@@ -32,6 +32,12 @@ pipeline {
                 sh 'ls -la'
             }
         }
+        
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()  
+            }
+        }
 
         stage('Build Images') {
             steps {
