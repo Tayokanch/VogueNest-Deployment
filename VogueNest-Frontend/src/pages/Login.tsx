@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useForm } from "../../node_modules/react-hook-form/dist";
+import { useForm } from "react-hook-form";
 import { LoginData } from "../services/interface";
 import LoadingBar from "../components/LoadingBar";
 import { userAuth } from "../contexts/AuthContext";
