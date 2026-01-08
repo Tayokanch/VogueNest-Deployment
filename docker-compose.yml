@@ -1,6 +1,6 @@
 services:
   voguenest-api:
-    build: ../VogueNest-API
+    build: ./VogueNest-API
     image: voguenestapi:latest
     env_file:
       - .env
@@ -17,7 +17,7 @@ services:
       - vogueshopping_network
 
   voguenest-frontend:
-    build: ../VogueNest-Frontend
+    build: ./VogueNest-Frontend
     image: voguenest-frontend:latest
     restart: always
     networks:
