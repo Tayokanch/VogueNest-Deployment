@@ -19,6 +19,8 @@ services:
   voguenest-frontend:
     build: ./VogueNest-Frontend
     image: voguenest-frontend:latest
+    port:
+      - "5137:80"
     restart: always
     networks:
       - vogueshopping_network
