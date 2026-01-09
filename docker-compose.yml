@@ -19,7 +19,7 @@ services:
   voguenest-frontend:
     build: ./VogueNest-Frontend
     image: voguenest-frontend:latest
-    port:
+    ports:
       - "5137:80"
     restart: always
     networks:
