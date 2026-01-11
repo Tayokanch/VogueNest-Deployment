@@ -30,7 +30,7 @@ services:
     container_name: voguenest-nginx
     image: voguenest-nginx:latest
     ports:
-      - "80:80"
+      - "8081:80"
     restart: always
     networks:
       - vogueshopping_network
