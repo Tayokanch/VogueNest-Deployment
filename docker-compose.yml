@@ -19,8 +19,6 @@ services:
   voguenest-frontend:
     build: ./VogueNest-Frontend
     image: voguenest-frontend:latest
-    ports:
-      - "80"
     restart: always
     networks:
       - vogueshopping_network
@@ -30,7 +28,7 @@ services:
     container_name: voguenest-nginx
     image: voguenest-nginx:latest
     ports:
-      - "80"
+      - "5147:80"
     restart: always
     networks:
       - vogueshopping_network
