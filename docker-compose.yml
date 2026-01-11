@@ -20,6 +20,8 @@ services:
     build: ./VogueNest-Frontend
     image: voguenest-frontend:latest
     restart: always
+    expose:
+      - 5147
     networks:
       - vogueshopping_network
   
