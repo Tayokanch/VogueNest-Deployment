@@ -20,8 +20,8 @@ services:
     build: ./VogueNest-Frontend
     image: voguenest-frontend:latest
     restart: always
-    expose:
-      - 5147
+    ports:
+      - "5148:80"
     networks:
       - vogueshopping_network
   
