@@ -21,7 +21,7 @@ services:
     image: voguenest-frontend:latest
     restart: always
     ports:
-      - "5147:80"
+      - "5148:80"
     networks:
       - vogueshopping_network
   
