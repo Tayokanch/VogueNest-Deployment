@@ -25,17 +25,17 @@ services:
     networks:
       - vogueshopping_network
   
-voguenest-nginx:
-  build: ./nginx
-  container_name: voguenest-nginx
-  image: voguenest-nginx:latest
-  ports:
-    - "80:80"
-  restart: always
-  networks:
-    - vogueshopping_network
-  depends_on:
-   - voguenest-api
+  voguenest-nginx:
+    build: ./nginx
+    container_name: voguenest-nginx
+    image: voguenest-nginx:latest
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      - vogueshopping_network
+    depends_on:
+    - voguenest-api
 
 
 networks:
