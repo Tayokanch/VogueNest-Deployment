@@ -19,9 +19,10 @@ const app = express();
 
 
 app.use(cors({
-  origin: ['https://voguenest.tayolabs.dev', 'http://localhost:5173'],
+  origin: ['http://voguenest-frontend.default.svc.cluster.local:5173'],
   credentials: true,
 }));
+
 
 app.use(compression());
 app.use(cookieParser());
@@ -35,7 +36,7 @@ app.use('/api/payment', stripeRouter);
 app.use('/api', refreshTokenLimiter, refreshTokenRouter);
 app.use('/api', healthCheckRouter);
 
-app.set('trust proxy', 3);
+app.set('trust proxy', true);
 const PORT = process.env.PORT || 3100;  
 
 app.listen(PORT, () => {
