@@ -37,9 +37,11 @@ app.use('/api', healthCheckRouter);
 
 app.set('trust proxy', 3);
 const PORT = process.env.PORT || 3100;  
+
 app.listen(PORT, () => {
-  console.log(`Server running on http://127.0.0.1:${PORT}/`);
+  console.log(`Server running on http://0.0.0.0:${PORT}/`);
 });
+
 
 const MONGODB_URL = process.env.MONGODB_URL;
 if (!MONGODB_URL) {
