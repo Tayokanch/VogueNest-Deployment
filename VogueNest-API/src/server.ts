@@ -37,7 +37,7 @@ app.use('/api', refreshTokenLimiter, refreshTokenRouter);
 app.use('/api', healthCheckRouter);
 
 app.set('trust proxy', true);
-const APIPORT = process.env.PORT || 3100;  
+const APIPORT = process.env.APIPORT;  
 
 app.listen(APIPORT, () => {
   console.log(`Server running on http://0.0.0.0:${APIPORT}/`);
