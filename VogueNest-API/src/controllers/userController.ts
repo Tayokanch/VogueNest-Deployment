@@ -6,8 +6,8 @@ import { User } from "../DB/user";
 import data from "../DB/data";
 
 dotenv.config();
-const SECRET = process.env.SECRET;
-if (!SECRET) {
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
   throw new Error("Secret not found");
 }
 const signUp = async (req: express.Request, res: express.Response) => {
@@ -55,8 +55,8 @@ const login = async (req: express.Request, res: express.Response) => {
 
     const { _id, role, name } = foundUser;
     const payload = { id: _id.toString(), role };
-    const token = jwt.sign(payload, SECRET, { expiresIn: "15m" });
-    const refreshToken = jwt.sign(payload, SECRET, { expiresIn: "7d" });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
+    const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,

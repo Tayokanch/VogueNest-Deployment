@@ -2,7 +2,7 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import { User } from '../DB/user';
 
-const SECRET = process.env.SECRET;
+const SECRET = process.env.JWT_SECRET;
 if (!SECRET) {
   throw new Error('Secret not found');
 }
