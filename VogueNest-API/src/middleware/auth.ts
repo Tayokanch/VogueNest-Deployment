@@ -6,7 +6,7 @@ export interface AuthenticatedRequest extends Request {
   decodedUser?: DecodedUserI;
 }
 
-const SECRET = process.env.SECRET;
+const SECRET = process.env.JWT_SECRET;
 if (!SECRET) {
   throw new Error('Secret not found');
 }

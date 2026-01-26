@@ -37,20 +37,27 @@ app.use('/api', refreshTokenLimiter, refreshTokenRouter);
 app.use('/api', healthCheckRouter);
 
 app.set('trust proxy', true);
-const PORT = process.env.PORT || 3100;  
+const APIPORT = process.env.PORT || 3100;  
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://0.0.0.0:${PORT}/`);
+app.listen(APIPORT, () => {
+  console.log(`Server running on http://0.0.0.0:${APIPORT}/`);
 });
 
 
-const MONGODB_URL = process.env.MONGODB_URL;
-if (!MONGODB_URL) {
+const mongoUser = process.env.MONGO_USER;
+const mongoPass = process.env.MONGO_PASS;
+const mongoHost = process.env.MONGO_HOST
+const mongoPort = process.env.MONGO_PORT 
+const dbName = process.env.DB_NAME 
+
+const mongoURI = `mongodb://${mongoUser}:${mongoPass}@${mongoHost}:${mongoPort}/${dbName}?authSource=admin`
+;
+if (!mongoURI) {
   throw new Error('MONGODB_URL is not defined');
 }
 
 
-mongoose.connect(MONGODB_URL)
+mongoose.connect(mongoURI)
   .then(() => {
     console.log('Successfully connected to MongoDB');
   })
