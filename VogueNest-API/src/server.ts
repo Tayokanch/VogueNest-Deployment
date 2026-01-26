@@ -45,14 +45,13 @@ app.listen(APIPORT, () => {
 
 
 const mongoUser = process.env.MONGO_USER;
-const mongoPass = process.env.MONGO_PASS;
-const mongoHost = process.env.MONGO_HOST
-const mongoPort = process.env.MONGO_PORT 
-const dbName = process.env.DB_NAME 
+const mongoPass = encodeURIComponent(process.env.MONGO_PASS || "");
+const mongoHost = process.env.MONGO_HOST;
+const mongoPort = process.env.MONGO_PORT;
+const dbName = process.env.DB_NAME;
 
-const mongoURI = `mongodb://${mongoUser}:${mongoPass}@${mongoHost}:${mongoPort}/${dbName}?authSource=admin`
-;
-console.log("This is mongoUR", mongoURI)
+const mongoURI = `mongodb://${mongoUser}:${mongoPass}@${mongoHost}:${mongoPort}/${dbName}?authSource=admin`;
+
 
 if (!mongoURI) {
   throw new Error('MONGODB_URL is not defined');
