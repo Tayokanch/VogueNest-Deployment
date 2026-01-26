@@ -19,8 +19,8 @@ const app = express();
 
 
 app.use(cors({
-  origin: ['http://voguenest-frontend.default.svc.cluster.local:5173'],
-  credentials: true,
+  origin: ['http://frontend.voguenest.com'],
+  credentials: true
 }));
 
 

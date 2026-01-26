@@ -8,7 +8,7 @@ interface logoutResponseI {
 
 class VogueNestService {
   http = axios.create({
-    baseURL: 'https://vogueshoppingapi.tayolabs.dev/api',
+    baseURL: 'http://voguenest-api-service.default.svc.cluster.local:3100/api',
   });
 
   // Helper method to create authenticated request config

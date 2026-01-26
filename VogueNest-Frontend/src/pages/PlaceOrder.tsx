@@ -33,7 +33,7 @@ const PlaceOrder = () => {
 
     try {
       const response = await fetch(
-        'http://localhost:8050/api/payment/create-checkout-session',
+        'http://voguenest-api-service.default.svc.cluster.local:3100/api/payment/create-checkout-session',
         {
           method: 'POST',
           headers: headers,
