@@ -52,6 +52,8 @@ const dbName = process.env.DB_NAME
 
 const mongoURI = `mongodb://${mongoUser}:${mongoPass}@${mongoHost}:${mongoPort}/${dbName}?authSource=admin`
 ;
+console.log("This is mongoUR", mongoURI)
+
 if (!mongoURI) {
   throw new Error('MONGODB_URL is not defined');
 }
