@@ -14,3 +14,4 @@ node_modules/
 /dist
 .env
 # Ignore environment files
+/secret

@@ -1,0 +1,61 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voguenest-api-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: voguenest-api-pod
+  template:
+    metadata:
+      labels:
+        app: voguenest-api-pod
+    spec:
+      containers:
+        - name: voguenest-api
+          image: tayokanch/voguenest-api-k8s:latest
+          ports:
+            - containerPort: 3120
+          env:
+            - name: STRIPE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secret-credential-store
+                  key: STRIPE_SECRET
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secret-credential-store
+                  key: JWT_SECRET
+            - name: APIPORT
+              valueFrom:
+                secretKeyRef:
+                  name: secret-credential-store
+                  key: APIPORT
+            - name: MONGO_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: secret-credential-store
+                  key: MONGO_PORT
+            - name: MONGO_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: secret-credential-store
+                  key: MONGO_HOST
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: secret-credential-store
+                  key: mongo-username
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: secret-credential-store
+                  key: mongo-password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret-credential-store
+                  key: DB_NAME

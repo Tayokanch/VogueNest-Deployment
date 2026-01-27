@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voguenest-frontend-deployment
+  labels:
+    app: voguenest-frontend
+    env: production
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      app: voguenest-frontend-pod
+  template:
+    metadata:
+      labels:
+        app: voguenest-frontend-pod
+    spec:
+      containers:
+        - name: voguenest-frontend
+          image: tayokanch/voguenest-frontend-k8s:latest
+          ports:
+            - containerPort: 80

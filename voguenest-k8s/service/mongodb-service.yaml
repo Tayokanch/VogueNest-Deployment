@@ -1,0 +1,13 @@
+# mongodb-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: voguenest-mongodb-service
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: voguenest-mongodb
+  ports:
+    - port: 27017
+      targetPort: 27017
