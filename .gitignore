@@ -14,4 +14,4 @@ node_modules/
 /dist
 .env
 # Ignore environment files
-/voguenest-k8s/secret/secret-credential.yaml
+voguenest-k8s/secret/secret-credential.yaml
