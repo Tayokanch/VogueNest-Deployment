@@ -1,5 +1,7 @@
 # Voguenest Full-Stack Kubernetes Project
 
+![Architecture Diagram](/doc/diagram-export-28-01-2026-13_18_11.png) 
+
 A hands-on **full-stack e-commerce application** deployed on a **bare-metal Kubernetes cluster**, including frontend, backend API, and MongoDB database, with realistic Kubernetes patterns.  
 Includes **Stripe test payment integration**, persistent storage, LoadBalancer exposure with MetalLB, and Ingress routing.
 
